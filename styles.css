@@ -1,0 +1,27 @@
+#header {
+    text-align: center;
+}
+
+#main {
+    width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+#canvas {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#counter {
+    display: block;
+}
+
+.controls {
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+}
