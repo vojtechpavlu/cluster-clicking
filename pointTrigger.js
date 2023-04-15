@@ -1,8 +1,16 @@
+/**
+ * This script is responsible for setting up the working environment
+ * for the clicking in the datapoints into a canvas. These are also
+ * downloadable in the CSV (Comma Separated Values) format.
+ */
+
+// Canvas preparation
 const canvasElement = document.getElementById("canvas");
 const canvasHeight = canvasElement.height;
 const canvasWidth = canvasElement.width;
 const canvasContext = canvasElement.getContext("2d");
 
+// Controls preparation
 const counterElement = document.getElementById("counter");
 const filenameElement = document.getElementById("filename");
 const downloadButton = document.getElementById("download-btn");
@@ -10,6 +18,7 @@ const flushButton = document.getElementById("flush-btn");
 downloadButton.onclick = () => download();
 flushButton.onclick = () => flushPoints();
 
+// Points registry
 let points = []
 
 /**
@@ -36,6 +45,12 @@ const drawPixel = (x, y) => {
   updateCounter();
 }
 
+/**
+ * Updates the counter by number of instances.
+ *
+ * Should be triggered everytime the number of instances
+ * drawn on the canvas changes.
+ */
 const updateCounter = () => {
   counterElement.innerHTML = `Number of instances: ${points.length}`;
 }
@@ -44,6 +59,16 @@ canvasElement.addEventListener("click", (event) => {
   drawPixel(event.x, event.y)
 })
 
+
+/**
+ * Triggers the csv file download.
+ *
+ * This function prepares the header of the csv file and
+ * for each of the points (instances) on the canvas, it
+ * formats the data points. The result is downloaded as
+ * a file with specified name given in the text input
+ * field with ".csv" extension.
+ */
 const download = () => {
   let content = "x,y\n"
 
@@ -65,6 +90,12 @@ const download = () => {
   a.remove();
 }
 
+/**
+ * Clears up the canvas.
+ *
+ * By calling this function, all of the instances drawn on the
+ * canvas are removed and the registry of data points is emptied.
+ */
 const flushPoints = () => {
   points = [];
   canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
