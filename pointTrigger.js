@@ -21,6 +21,10 @@ flushButton.onclick = () => flushPoints();
 // Points registry
 let points = []
 
+// Points on the canvas
+const POINT_COLOUR = "#0D6EFD";
+const POINT_SIZE = 2;
+
 /**
  * Draw a pixel on the canvas by given coordinates.
  *
@@ -36,8 +40,8 @@ const drawPixel = (x, y) => {
   const Y = Math.round(y - rect.top);
 
   canvasContext.beginPath();
-  canvasContext.fillStyle = "#0D6EFD"
-  canvasContext.arc(X, Y, 2, 0, 2 * Math.PI);
+  canvasContext.fillStyle = POINT_COLOUR
+  canvasContext.arc(X, Y, POINT_SIZE, 0, 2 * Math.PI);
   canvasContext.stroke();
   canvasContext.fill();
 
