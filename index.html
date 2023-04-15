@@ -58,13 +58,20 @@
                        placeholder="Filename"
                        aria-describedby="suffix">
                 <div class="input-group-append">
-                    <span class="input-group-text bg-secondary border-dark" id="suffix">.csv</span>
+                    <span class="input-group-text bg-warning border-dark" id="suffix">.csv</span>
                 </div>
             </div>
 
-            <button id="download-btn" type="button" class="btn btn-success m-2">Download</button>
-            <button id="flush-btn" type="button" class="btn btn-danger m-2">Clear</button>
-            <button id="redraw-btn" type="button" class="btn btn-warning m-2">Redraw</button>
+            <button id="download-btn"
+                    type="button"
+                    class="btn btn-success m-2"
+                    data-toggle="tooltip"
+                    title="Downloads a file in csv format containing all the points">Download</button>
+            <button id="flush-btn"
+                    type="button"
+                    class="btn btn-danger m-2"
+                    data-toggle="tooltip"
+                    title="Remove all the points and forget everything">Clear</button>
         </div>
 
         <div class="controls m-3">
@@ -72,28 +79,28 @@
 
                 <div class="input-group m-2 input-group-sm">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="xmin-label">X min</span>
+                        <span class="input-group-text bg-warning border-dark" id="xmin-label">X min</span>
                     </div>
                     <input type="number" id="xmin" class="form-control" aria-describedby="xmin-label">
                 </div>
 
                 <div class="input-group m-2 input-group-sm">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="xmax-label">X max</span>
+                        <span class="input-group-text bg-warning border-dark" id="xmax-label">X max</span>
                     </div>
                     <input type="number" id="xmax" class="form-control" aria-describedby="xmax-label">
                 </div>
 
                 <div class="input-group m-2 input-group-sm">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="ymin-label">Y min</span>
+                        <span class="input-group-text bg-warning border-dark" id="ymin-label">Y min</span>
                     </div>
                     <input type="number" id="ymin" class="form-control" aria-describedby="ymin-label">
                 </div>
 
                 <div class="input-group m-2 input-group-sm">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="ymax-label">Y max</span>
+                        <span class="input-group-text bg-warning border-dark" id="ymax-label">Y max</span>
                     </div>
                     <input type="number" id="ymax" class="form-control" aria-describedby="ymax-label">
                 </div>

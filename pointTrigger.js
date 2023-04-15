@@ -33,6 +33,7 @@ const bCornerElement = document.getElementById("b-corner");
 const cCornerElement = document.getElementById("c-corner");
 const dCornerElement = document.getElementById("d-corner");
 
+// Default scaling - same as canvas
 xminElement.value = 0;
 xmaxElement.value = 500;
 yminElement.value = 0;
@@ -74,10 +75,15 @@ const drawPixel = (x, y, recalc = true) => {
   return {x, y}
 }
 
+/**
+ * Adds the given point into the registry.
+ *
+ * @param x coordinate
+ * @param y coordinate
+ */
 const addPoint = (x, y) => {
   const point = [x, canvasHeight - y]
   points.push(point);
-  console.log(point)
   updateCounter();
 }
 
@@ -139,10 +145,19 @@ const flushPoints = () => {
   updateCounter();
 }
 
+/**
+ * Clears down the whole canvas but does not touch the registry
+ * of points.
+ */
 const tearDownCanvas = () => {
   canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
 }
 
+/**
+ * Returns the dimensions of the wanted frame.
+ *
+ * @returns object minimums and maximums for both x and y axes
+ */
 const canvasFrame = () => {
   return {
     xmin: xminElement.value,
@@ -152,6 +167,12 @@ const canvasFrame = () => {
   }
 }
 
+/**
+ * Updates the coordinates written in the corners of the canvas.
+ *
+ * When any minimum is equal or greater than maximum, the minimum
+ * is set to maximum minus one.
+ */
 const updateCornerCoordinates = () => {
   const { xmin, xmax, ymin, ymax } = canvasFrame();
 
@@ -162,11 +183,21 @@ const updateCornerCoordinates = () => {
     dCornerElement.innerHTML = `<small><samp>[${xmax},${ymin}]</samp></small>`;
   } else if (xmin < xmax) {
     yminElement.value = ymaxElement.value - 1;
+    updateCornerCoordinates();
   } else {
     xminElement.value = xmaxElement.value - 1;
+    updateCornerCoordinates();
   }
 }
 
+/**
+ * Scales the given point from original canvas dimensions into custom scaling.
+ *
+ * @param x coordinate of the point
+ * @param y coordinate of the point
+ *
+ * @returns {[number, number]} new coordinates scaled to desired framing.
+ */
 const scalePoint = (x, y) => {
   const { xmin, xmax, ymin, ymax } = canvasFrame();
 
