@@ -4,7 +4,11 @@ const canvasWidth = canvasElement.width;
 const canvasContext = canvasElement.getContext("2d");
 
 const counterElement = document.getElementById("counter");
-const filenameElement = document.getElementById("filename")
+const filenameElement = document.getElementById("filename");
+const downloadButton = document.getElementById("download-btn");
+const flushButton = document.getElementById("flush-btn");
+downloadButton.onclick = () => download();
+flushButton.onclick = () => flushPoints();
 
 let points = []
 
