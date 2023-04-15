@@ -38,13 +38,6 @@ xmaxElement.value = 500;
 yminElement.value = 0;
 ymaxElement.value = 500;
 
-console.log("NOW",
-  xminElement.value,
-  xmaxElement.value,
-  yminElement.value,
-  ymaxElement.value
-)
-
 // Points registry
 let points = []
 
@@ -117,6 +110,7 @@ const download = () => {
 
   // Create the .csv file
   points
+    .map(point => scalePoint(point[0], point[1]))
     .map(point => `${point[0]},${point[1]}\n`)
     .forEach(record => content += record);
 
@@ -149,19 +143,17 @@ const tearDownCanvas = () => {
   canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
 }
 
-const redrawCanvas = () => {
-  tearDownCanvas();
-  console.log("Redrawing!", points)
-  points.forEach(point => drawPixel(point[0], canvasHeight - point[1], false))
+const canvasFrame = () => {
+  return {
+    xmin: xminElement.value,
+    xmax: xmaxElement.value,
+    ymin: yminElement.value,
+    ymax: ymaxElement.value
+  }
 }
 
 const updateCornerCoordinates = () => {
-  xmin = xminElement.value;
-  xmax = xmaxElement.value;
-  ymin = yminElement.value;
-  ymax = ymaxElement.value;
-
-  console.log("AFT", xmin, xmax, ymin, ymax)
+  const { xmin, xmax, ymin, ymax } = canvasFrame();
 
   if (xmin < xmax && ymin < ymax) {
     aCornerElement.innerHTML = `<small><samp>[${xmin},${ymax}]</samp></small>`;
@@ -173,6 +165,14 @@ const updateCornerCoordinates = () => {
   } else {
     xminElement.value = xmaxElement.value - 1;
   }
+}
+
+const scalePoint = (x, y) => {
+  const { xmin, xmax, ymin, ymax } = canvasFrame();
+
+  const newX = (x * ((xmax - xmin) / canvasWidth)) + parseFloat(xmin);
+  const newY = (y * ((ymax - ymin) / canvasHeight)) + parseFloat(ymin);
+  return [newX, newY]
 }
 
 updateCornerCoordinates();
